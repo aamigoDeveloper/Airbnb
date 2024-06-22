@@ -1,6 +1,6 @@
 import profilePlaceholder from "@/public/profile.png"
 import { Menu } from "lucide-react"
-import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import Image from "next/image"
 
 export default function UserMenu() {

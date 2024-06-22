@@ -1,6 +1,8 @@
 "use client"
 
-import { TbBeach, TbMountain, TbPool } from "react-icons/tb"
+import { useSearchParams } from "next/navigation"
+import { BsSnow } from "react-icons/bs"
+import { FaSkiing } from "react-icons/fa"
 import {
   GiBarn,
   GiBoatFishing,
@@ -11,13 +13,11 @@ import {
   GiIsland,
   GiWindmill,
 } from "react-icons/gi"
-import { MdOutlineVilla } from "react-icons/md"
-import { FaSkiing } from "react-icons/fa"
-import { BsSnow } from "react-icons/bs"
 import { IoDiamond } from "react-icons/io5"
-import CategoryBox from "./CategoryBox"
-import Container from "./Container"
-import { useSearchParams } from "next/navigation"
+import { MdOutlineVilla } from "react-icons/md"
+import { TbBeach, TbMountain, TbPool } from "react-icons/tb"
+import CategoryBox from "../CategoryBox"
+import Container from "../Container"
 
 export const categories = [
   {

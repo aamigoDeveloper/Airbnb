@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import Search from "./Search"
 import UserMenu from "./UserMenu"
-import Container from "./Container"
+import Container from "../Container"
 import Categories from "./Categories"
 
 export default function Navbar() {

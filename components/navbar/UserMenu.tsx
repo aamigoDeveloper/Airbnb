@@ -1,7 +1,15 @@
+"use client"
+
 import profilePlaceholder from "@/public/profile.png"
 import { Menu } from "lucide-react"
-import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu"
 import Image from "next/image"
+import Modal from "../modals/Modal"
 
 export default function UserMenu() {
   return (
@@ -19,6 +27,14 @@ export default function UserMenu() {
             height={30}
           />
         </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem asChild>
+            <Modal title="Login" />
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Modal title="Sign up" />
+          </DropdownMenuItem>
+        </DropdownMenuContent>
       </DropdownMenu>
     </div>
   )

@@ -10,7 +10,7 @@ export default function UserMenu() {
         Airbnb your home
       </div>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-1.5 border rounded-full p-1 shadow-sm hover:shadow-md transition">
+        <DropdownMenuTrigger className="flex items-center gap-1.5 border rounded-full px-1 shadow-sm hover:shadow-md transition">
           <Menu size={20} />
           <Image
             src={profilePlaceholder}

@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         <Navbar />
-        <main className="max-w-[2450px] px-16 py-10">{children}</main>
+        <main className="pb-20 pt-28">{children}</main>
       </body>
     </html>
   )

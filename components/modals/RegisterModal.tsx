@@ -6,20 +6,27 @@ import { FcGoogle } from "react-icons/fc"
 import Heading from "../Heading"
 import { Button } from "../ui/button"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
+import { signIn } from "next-auth/react"
 
 export default function RegisterModal() {
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema),
   })
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = form
 
   const bodyContent = (
     <>
@@ -27,7 +34,7 @@ export default function RegisterModal() {
       <Form {...form}>
         <form className="space-y-4">
           <FormField
-            control={form.control}
+            control={control}
             name="name"
             render={({ field }) => (
               <FormItem className="flex flex-col items-start ">
@@ -40,7 +47,7 @@ export default function RegisterModal() {
             )}
           />
           <FormField
-            control={form.control}
+            control={control}
             name="email"
             render={({ field }) => (
               <FormItem className="flex flex-col items-start ">
@@ -53,7 +60,7 @@ export default function RegisterModal() {
             )}
           />
           <FormField
-            control={form.control}
+            control={control}
             name="password"
             render={({ field }) => (
               <FormItem className="flex flex-col items-start">
@@ -79,7 +86,11 @@ export default function RegisterModal() {
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
       </Button>
-      <Button variant={"outline"} className="p-6 w-full">
+      <Button
+        variant={"outline"}
+        className="p-6 w-full"
+        onClick={() => signIn("github")}
+      >
         <FaGithub size={40} className="absolute left-10" />
         Continue with Github
       </Button>

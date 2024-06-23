@@ -10,6 +10,8 @@ import {
 } from "../ui/dropdown-menu"
 import Image from "next/image"
 import Modal from "../modals/Modal"
+import LoginModal from "../modals/LoginModal"
+import RegisterModal from "../modals/RegisterModal"
 
 export default function UserMenu() {
   return (
@@ -29,10 +31,10 @@ export default function UserMenu() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem asChild>
-            <Modal title="Login" />
+            <LoginModal />
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Modal title="Sign up" />
+            <RegisterModal />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

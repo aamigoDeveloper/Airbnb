@@ -1,20 +1,20 @@
+import { LoginValues, loginSchema } from "@/lib/validation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
 import Heading from "../Heading"
 import { Button } from "../ui/button"
-import { Input } from "../ui/input"
-import { LoginValues, loginSchema } from "@/lib/validation"
-import { zodResolver } from "@hookform/resolvers/zod"
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "../ui/form"
+import { Input } from "../ui/input"
 import Modal from "./Modal"
-import { useForm } from "react-hook-form"
 
 export default function LoginModal() {
   const form = useForm<LoginValues>({

@@ -1,7 +1,14 @@
 "use client"
 
 import profilePlaceholder from "@/public/profile.png"
+import { SafeUser } from "@/types"
 import { Menu } from "lucide-react"
+import { signOut } from "next-auth/react"
+import Image from "next/image"
+import Link from "next/link"
+import LoginModal from "../modals/LoginModal"
+import RegisterModal from "../modals/RegisterModal"
+import { Button } from "../ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,14 +16,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import Image from "next/image"
-import Modal from "../modals/Modal"
-import LoginModal from "../modals/LoginModal"
-import RegisterModal from "../modals/RegisterModal"
-import { SafeUser } from "@/types"
-import { Button } from "../ui/button"
-import { signOut } from "next-auth/react"
-import Link from "next/link"
 
 interface UserMenuProps {
   currentUser: SafeUser | null

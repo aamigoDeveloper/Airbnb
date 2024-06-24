@@ -24,7 +24,7 @@ export default function Modal({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="w-full">
+        <Button variant="ghost" className="w-full flex justify-start">
           {title}
         </Button>
       </DialogTrigger>

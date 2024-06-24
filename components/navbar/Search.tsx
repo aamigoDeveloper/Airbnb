@@ -2,7 +2,7 @@ import { SearchIcon } from "lucide-react"
 
 export default function Search() {
   return (
-    <div className="border rounded-full px-4 py-3 cursor-pointer shadow-sm hover:shadow-md transition">
+    <div className="border rounded-full px-5 py-2 cursor-pointer shadow-sm hover:shadow-md transition">
       <div className="flex items-center">
         <div className="flex items-center">
           <p className="pr-4 text-sm border-r border-r-neutral-400">Anywhere</p>

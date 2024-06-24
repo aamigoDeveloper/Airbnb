@@ -16,11 +16,7 @@ interface ModalProps {
   footer?: React.ReactElement
 }
 
-export default function Modal({
-  title,
-  body,
-  footer,
-}: ModalProps) {
+export default function Modal({ title, body, footer }: ModalProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>

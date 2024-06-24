@@ -1,5 +1,9 @@
+import { createUser } from "@/app/actions/createUser"
 import { RegisterValues, registerSchema } from "@/lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Loader2 } from "lucide-react"
+import { signIn } from "next-auth/react"
+import { useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
@@ -15,24 +19,31 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
-import { signIn } from "next-auth/react"
 
 export default function RegisterModal() {
+  const [isPending, startTransition] = useTransition()
+
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema),
   })
 
-  const {
-    control,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = form
+  const { control, handleSubmit } = form
+
+  const onSubmit = async (formData: RegisterValues) => {
+    startTransition(async () => {
+      try {
+        await createUser(formData)
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  }
 
   const bodyContent = (
     <>
       <Heading title="Welcome to Airbnb" subtitle="Create an Acoount" />
       <Form {...form}>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <FormField
             control={control}
             name="name"
@@ -72,8 +83,9 @@ export default function RegisterModal() {
               </FormItem>
             )}
           />
-          <Button type="submit" variant={"destructive"} className="p-6 w-full">
+          <Button type="submit" disabled={isPending} variant={"destructive"} className="p-6 w-full">
             Continue
+            {isPending && <Loader2 size={18} className="animate-spin ml-2" />}
           </Button>
         </form>
       </Form>

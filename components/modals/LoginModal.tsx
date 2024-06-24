@@ -1,5 +1,8 @@
 import { LoginValues, loginSchema } from "@/lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Loader2 } from "lucide-react"
+import { signIn } from "next-auth/react"
+import { useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
@@ -15,20 +18,36 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
-import { signIn } from "next-auth/react"
 
 export default function LoginModal() {
+  const [isPending, startTransition] = useTransition()
+
   const form = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
   })
+
+  const { control, handleSubmit } = form
+
+  const onSubmit = async (data: LoginValues) => {
+    startTransition(async () => {
+      try {
+        await signIn("credentials", {
+          ...data,
+          redirect: false,
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  }
 
   const bodyContent = (
     <>
       <Heading title="Welcome Back!" subtitle="Login to your Acoount!" />
       <Form {...form}>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <FormField
-            control={form.control}
+            control={control}
             name="email"
             render={({ field }) => (
               <FormItem className="flex flex-col items-start ">
@@ -41,7 +60,7 @@ export default function LoginModal() {
             )}
           />
           <FormField
-            control={form.control}
+            control={control}
             name="password"
             render={({ field }) => (
               <FormItem className="flex flex-col items-start">
@@ -53,8 +72,14 @@ export default function LoginModal() {
               </FormItem>
             )}
           />
-          <Button type="submit" variant={"destructive"} className="p-6 w-full">
+          <Button
+            type="submit"
+            disabled={isPending}
+            variant={"destructive"}
+            className="p-6 w-full"
+          >
             Continue
+            {isPending && <Loader2 size={20} className="animate-spin ml-2" />}
           </Button>
         </form>
       </Form>

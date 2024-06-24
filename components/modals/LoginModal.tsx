@@ -96,7 +96,11 @@ export default function LoginModal() {
 
   const footerContent = (
     <div className="flex flex-col flex-grow gap-3">
-      <Button variant={"outline"} className="p-6 w-full">
+      <Button
+        variant={"outline"}
+        className="p-6 w-full"
+        onClick={() => signIn("google")}
+      >
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
       </Button>

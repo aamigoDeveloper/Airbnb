@@ -88,7 +88,12 @@ export default function RegisterModal() {
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isPending} variant={"destructive"} className="p-6 w-full">
+          <Button
+            type="submit"
+            disabled={isPending}
+            variant={"destructive"}
+            className="p-6 w-full"
+          >
             Continue
             {isPending && <Loader2 size={18} className="animate-spin ml-2" />}
           </Button>
@@ -99,7 +104,11 @@ export default function RegisterModal() {
 
   const footerContent = (
     <div className="flex flex-col flex-grow gap-3">
-      <Button variant={"outline"} className="p-6 w-full">
+      <Button
+        variant={"outline"}
+        className="p-6 w-full"
+        onClick={() => signIn("google")}
+      >
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
       </Button>

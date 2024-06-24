@@ -36,7 +36,8 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
               alt="Profile"
               width={30}
               height={25}
-              className="rounded-full self-center"
+              className="rounded-full self-center w-auto h-auto"
+              priority
             />
           </div>
         </DropdownMenuTrigger>

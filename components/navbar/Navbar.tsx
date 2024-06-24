@@ -23,6 +23,8 @@ export default function Navbar({ currentUser }: NavbarProps) {
                 alt="Airbnb Image"
                 width={125}
                 height={100}
+                priority
+                className="w-auto h-auto self-center"
               />
             </Link>
             <Search />

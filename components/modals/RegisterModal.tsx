@@ -1,3 +1,5 @@
+"use client"
+
 import { createUser } from "@/app/actions/createUser"
 import { RegisterValues, registerSchema } from "@/lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,9 +21,11 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
+import { useRouter } from "next/navigation"
 
 export default function RegisterModal() {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema),
@@ -33,6 +37,7 @@ export default function RegisterModal() {
     startTransition(async () => {
       try {
         await createUser(formData)
+        router.refresh()
       } catch (error) {
         console.log(error)
       }

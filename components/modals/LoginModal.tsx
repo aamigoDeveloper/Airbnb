@@ -1,3 +1,5 @@
+"use client"
+
 import { LoginValues, loginSchema } from "@/lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
@@ -18,9 +20,11 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
+import { useRouter } from "next/navigation"
 
 export default function LoginModal() {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   const form = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
@@ -34,6 +38,10 @@ export default function LoginModal() {
         await signIn("credentials", {
           ...data,
           redirect: false,
+        }).then((callback) => {
+          if (callback?.ok) {
+            router.refresh()
+          }
         })
       } catch (error) {
         console.log(error)

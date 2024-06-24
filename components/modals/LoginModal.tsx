@@ -6,15 +6,16 @@ import { FcGoogle } from "react-icons/fc"
 import Heading from "../Heading"
 import { Button } from "../ui/button"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
+import { signIn } from "next-auth/react"
 
 export default function LoginModal() {
   const form = useForm<LoginValues>({
@@ -66,7 +67,11 @@ export default function LoginModal() {
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
       </Button>
-      <Button variant={"outline"} className="p-6 w-full">
+      <Button
+        variant={"outline"}
+        className="p-6 w-full"
+        onClick={() => signIn("github")}
+      >
         <FaGithub size={40} className="absolute left-10" />
         Continue with Github
       </Button>

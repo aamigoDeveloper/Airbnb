@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import Image from "next/image"
@@ -15,6 +16,7 @@ import RegisterModal from "../modals/RegisterModal"
 import { SafeUser } from "@/types"
 import { Button } from "../ui/button"
 import { signOut } from "next-auth/react"
+import Link from "next/link"
 
 interface UserMenuProps {
   currentUser: SafeUser | null
@@ -42,11 +44,27 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
         <DropdownMenuContent>
           {currentUser ? (
             <>
+              <DropdownMenuItem asChild className="p-3 font-medium">
+                <Link href={"/"}>My trips</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="p-3 font-medium">
+                <Link href={"/"}>My favorites</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="p-3 font-medium">
+                <Link href={"/"}>My reservations</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="p-3 font-medium">
+                <Link href={"/"}>My properties</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="p-3 font-medium">
+                <Link href={"/"}>Airbnb my home</Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Button
                   onClick={() => signOut()}
                   variant={"ghost"}
-                  className="w-full cursor-pointer hover:border-none"
+                  className="w-full flex justify-start"
                 >
                   Log out
                 </Button>

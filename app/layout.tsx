@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import "./globals.css"
+import { getCurrentUser } from "./actions/getCurrentUser"
 
 const fontSans = FontSans({ subsets: ["latin"] })
 
@@ -14,15 +15,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const currentUser = await getCurrentUser()
   return (
     <html lang="en">
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         <main className="pb-20 pt-28">{children}</main>
       </body>
     </html>

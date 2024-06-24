@@ -12,8 +12,15 @@ import Image from "next/image"
 import Modal from "../modals/Modal"
 import LoginModal from "../modals/LoginModal"
 import RegisterModal from "../modals/RegisterModal"
+import { SafeUser } from "@/types"
+import { Button } from "../ui/button"
+import { signOut } from "next-auth/react"
 
-export default function UserMenu() {
+interface UserMenuProps {
+  currentUser: SafeUser | null
+}
+
+export default function UserMenu({ currentUser }: UserMenuProps) {
   return (
     <div className="flex items-center justify-between gap-6">
       <div className="text-sm px-4 py-3 rounded-full hover:bg-neutral-100/80 transition cursor-pointer">
@@ -22,20 +29,39 @@ export default function UserMenu() {
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-1.5 border rounded-full px-2 shadow-sm hover:shadow-md transition">
           <Menu size={20} />
-          <Image
-            src={profilePlaceholder}
-            alt="Profile"
-            width={35}
-            height={30}
-          />
+          <div>
+            <Image
+              src={currentUser?.image || profilePlaceholder}
+              alt="Profile"
+              width={30}
+              height={25}
+              className="rounded-full self-center"
+            />
+          </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem asChild>
-            <LoginModal />
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <RegisterModal />
-          </DropdownMenuItem>
+          {currentUser ? (
+            <>
+              <DropdownMenuItem asChild>
+                <Button
+                  onClick={() => signOut()}
+                  variant={"ghost"}
+                  className="w-full cursor-pointer hover:border-none"
+                >
+                  Log out
+                </Button>
+              </DropdownMenuItem>
+            </>
+          ) : (
+            <>
+              <DropdownMenuItem asChild>
+                <LoginModal />
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <RegisterModal />
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

@@ -5,8 +5,13 @@ import Search from "./Search"
 import UserMenu from "./UserMenu"
 import Container from "../Container"
 import Categories from "./Categories"
+import { SafeUser } from "@/types"
 
-export default function Navbar() {
+interface NavbarProps {
+  currentUser: SafeUser | null
+}
+
+export default function Navbar({ currentUser }: NavbarProps) {
   return (
     <header className="fixed w-full z-10 bg-white shadow-sm">
       <div className="py-4 border-b[1px]">
@@ -21,7 +26,7 @@ export default function Navbar() {
               />
             </Link>
             <Search />
-            <UserMenu />
+            <UserMenu currentUser={currentUser} />
           </nav>
         </Container>
       </div>

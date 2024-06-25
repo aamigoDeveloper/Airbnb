@@ -1,9 +1,10 @@
 import Navbar from "@/components/navbar/Navbar"
+import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
-import "./globals.css"
 import { getCurrentUser } from "./actions/getCurrentUser"
+import "./globals.css"
 
 const fontSans = FontSans({ subsets: ["latin"] })
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         <Navbar currentUser={currentUser} />
         <main className="pb-20 pt-28">{children}</main>
+        <Toaster />
       </body>
     </html>
   )

@@ -21,10 +21,12 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
+import { useToast } from "../ui/use-toast"
 
 export default function LoginModal() {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
@@ -43,8 +45,14 @@ export default function LoginModal() {
             router.refresh()
           }
         })
+        toast({
+          title: "Welcome Back!",
+        })
       } catch (error) {
-        console.log(error)
+        toast({
+          title: "uh oh! Something went wrong, Please try again.",
+          variant: "destructive"
+        })
       }
     })
   }

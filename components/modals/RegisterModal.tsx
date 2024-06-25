@@ -22,10 +22,12 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
+import { useToast } from "../ui/use-toast"
 
 export default function RegisterModal() {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema),
@@ -45,8 +47,14 @@ export default function RegisterModal() {
             router.refresh()
           }
         })
+        toast({
+          title: "You have Successfully Signed up! ✅"
+        })
       } catch (error) {
-        console.log(error)
+        toast({
+          title: "uh oh! Something went wrong, Please try again.",
+          variant: "destructive"
+        })
       }
     })
   }

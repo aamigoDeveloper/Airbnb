@@ -16,12 +16,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import { useToast } from "../ui/use-toast"
 
 interface UserMenuProps {
   currentUser: SafeUser | null
 }
 
 export default function UserMenu({ currentUser }: UserMenuProps) {
+  const { toast } = useToast()
   return (
     <div className="flex items-center justify-between gap-6">
       <div className="text-sm px-4 py-3 rounded-full hover:bg-neutral-100/80 transition cursor-pointer">
@@ -62,7 +64,12 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Button
-                  onClick={() => signOut()}
+                  onClick={() => {
+                    signOut()
+                    toast({
+                      title: "Logged out Successfully! ✅",
+                    })
+                  }}
                   variant={"ghost"}
                   className="w-full flex justify-start"
                 >

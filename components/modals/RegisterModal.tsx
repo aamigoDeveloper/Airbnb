@@ -48,12 +48,12 @@ export default function RegisterModal() {
           }
         })
         toast({
-          title: "You have Successfully Signed up! ✅"
+          title: "You have Successfully Signed up! ✅",
         })
       } catch (error) {
         toast({
           title: "uh oh! Something went wrong, Please try again.",
-          variant: "destructive"
+          variant: "destructive",
         })
       }
     })
@@ -122,7 +122,12 @@ export default function RegisterModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => signIn("google")}
+        onClick={() => {
+          signIn("google")
+          toast({
+            title: "You have Successfully Signed up! ✅",
+          })
+        }}
       >
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
@@ -130,7 +135,12 @@ export default function RegisterModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => signIn("github")}
+        onClick={() => {
+          signIn("github")
+          toast({
+            title: "You have Successfully Signed up! ✅",
+          })
+        }}
       >
         <FaGithub size={40} className="absolute left-10" />
         Continue with Github

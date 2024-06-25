@@ -51,7 +51,7 @@ export default function LoginModal() {
       } catch (error) {
         toast({
           title: "uh oh! Something went wrong, Please try again.",
-          variant: "destructive"
+          variant: "destructive",
         })
       }
     })
@@ -107,7 +107,12 @@ export default function LoginModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => signIn("google")}
+        onClick={() => {
+          signIn("google")
+          toast({
+            title: "Welcome Back!",
+          })
+        }}
       >
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
@@ -115,7 +120,12 @@ export default function LoginModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => signIn("github")}
+        onClick={() => {
+          signIn("github")
+          toast({
+            title: "Welcome Back!",
+          })
+        }}
       >
         <FaGithub size={40} className="absolute left-10" />
         Continue with Github

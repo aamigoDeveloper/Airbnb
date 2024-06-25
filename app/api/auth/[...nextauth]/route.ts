@@ -56,6 +56,29 @@ const handler = NextAuth({
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async signIn({ user, account, profile }) {
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      return url.startsWith(baseUrl) ? url : baseUrl
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+      }
+      return token
+    },
+    async session({ session, token }) {
+      if (token && token.id) {
+        session.user = {
+          ...session.user,
+          id: token.id,
+        }
+      }
+      return session
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
 })
 

@@ -1,11 +1,11 @@
 import airbnbImage from "@/public/airbnb-image.png"
+import { SafeUser } from "@/types"
 import Image from "next/image"
 import Link from "next/link"
-import Search from "./Search"
-import UserMenu from "./UserMenu"
 import Container from "../Container"
 import Categories from "./Categories"
-import { SafeUser } from "@/types"
+import Search from "./Search"
+import UserMenu from "./UserMenu"
 
 interface NavbarProps {
   currentUser: SafeUser | null

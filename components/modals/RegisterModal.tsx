@@ -5,6 +5,7 @@ import { RegisterValues, registerSchema } from "@/lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { FaGithub } from "react-icons/fa"
@@ -21,7 +22,6 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import Modal from "./Modal"
-import { useRouter } from "next/navigation"
 
 export default function RegisterModal() {
   const [isPending, startTransition] = useTransition()
@@ -37,7 +37,14 @@ export default function RegisterModal() {
     startTransition(async () => {
       try {
         await createUser(formData)
-        router.refresh()
+        await signIn("credentials", {
+          ...formData,
+          redirect: false,
+        }).then((callback) => {
+          if (callback?.ok) {
+            router.refresh()
+          }
+        })
       } catch (error) {
         console.log(error)
       }

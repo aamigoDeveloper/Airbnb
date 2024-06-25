@@ -45,10 +45,10 @@ export default function RegisterModal() {
         }).then((callback) => {
           if (callback?.ok) {
             router.refresh()
+            toast({
+              title: "You have Successfully Signed up! ✅",
+            })
           }
-        })
-        toast({
-          title: "You have Successfully Signed up! ✅",
         })
       } catch (error) {
         toast({
@@ -122,12 +122,7 @@ export default function RegisterModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => {
-          signIn("google")
-          toast({
-            title: "You have Successfully Signed up! ✅",
-          })
-        }}
+        onClick={() => signIn("google")}
       >
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
@@ -135,12 +130,7 @@ export default function RegisterModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => {
-          signIn("github")
-          toast({
-            title: "You have Successfully Signed up! ✅",
-          })
-        }}
+        onClick={() => signIn("github")}
       >
         <FaGithub size={40} className="absolute left-10" />
         Continue with Github

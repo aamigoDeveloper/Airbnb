@@ -43,10 +43,10 @@ export default function LoginModal() {
         }).then((callback) => {
           if (callback?.ok) {
             router.refresh()
+            toast({
+              title: "Welcome Back!",
+            })
           }
-        })
-        toast({
-          title: "Welcome Back!",
         })
       } catch (error) {
         toast({
@@ -107,12 +107,7 @@ export default function LoginModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => {
-          signIn("google")
-          toast({
-            title: "Welcome Back!",
-          })
-        }}
+        onClick={() => signIn("google")}
       >
         <FcGoogle size={40} className="absolute left-10" />
         Continue with Google
@@ -120,12 +115,7 @@ export default function LoginModal() {
       <Button
         variant={"outline"}
         className="p-6 w-full"
-        onClick={() => {
-          signIn("github")
-          toast({
-            title: "Welcome Back!",
-          })
-        }}
+        onClick={() => signIn("github")}
       >
         <FaGithub size={40} className="absolute left-10" />
         Continue with Github

@@ -103,15 +103,6 @@ export default function RegisterModal() {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            disabled={isPending}
-            variant={"destructive"}
-            className="p-6 w-full"
-          >
-            Continue
-            {isPending && <Loader2 size={18} className="animate-spin ml-2" />}
-          </Button>
         </form>
       </Form>
     </>
@@ -138,5 +129,14 @@ export default function RegisterModal() {
     </div>
   )
 
-  return <Modal title="Sign up" body={bodyContent} footer={footerContent} />
+  return (
+    <Modal
+      title="Sign up"
+      body={bodyContent}
+      footer={footerContent}
+      actionLabel="Continue"
+      disabled={isPending}
+      onSubmit={handleSubmit(onSubmit)}
+    />
+  )
 }

@@ -88,15 +88,6 @@ export default function LoginModal() {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            disabled={isPending}
-            variant={"destructive"}
-            className="p-6 w-full"
-          >
-            Continue
-            {isPending && <Loader2 size={20} className="animate-spin ml-2" />}
-          </Button>
         </form>
       </Form>
     </>
@@ -123,5 +114,14 @@ export default function LoginModal() {
     </div>
   )
 
-  return <Modal title="Login" body={bodyContent} footer={footerContent} />
+  return (
+    <Modal
+      title="Login"
+      body={bodyContent}
+      footer={footerContent}
+      actionLabel="Continue"
+      disabled={isPending}
+      onSubmit={handleSubmit(onSubmit)}
+    />
+  )
 }

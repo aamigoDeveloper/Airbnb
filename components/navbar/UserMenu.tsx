@@ -1,7 +1,7 @@
 "use client"
 
 import profilePlaceholder from "@/public/profile.png"
-import { SafeUser } from "@/types"
+import { SafeUser } from "@/app/types"
 import { Menu } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Image from "next/image"

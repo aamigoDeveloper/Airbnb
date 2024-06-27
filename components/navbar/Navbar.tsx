@@ -1,5 +1,5 @@
 import airbnbImage from "@/public/airbnb-image.png"
-import { SafeUser } from "@/types"
+import { SafeUser } from "@/app/types"
 import Image from "next/image"
 import Link from "next/link"
 import Container from "../Container"

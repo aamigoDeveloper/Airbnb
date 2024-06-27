@@ -17,6 +17,8 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { useToast } from "../ui/use-toast"
+import RentModal from "../modals/RentModal"
+import { useCallback } from "react"
 
 interface UserMenuProps {
   currentUser: SafeUser | null
@@ -24,10 +26,22 @@ interface UserMenuProps {
 
 export default function UserMenu({ currentUser }: UserMenuProps) {
   const { toast } = useToast()
+
+  const openRentModal = useCallback(() => {
+    if (!currentUser) {
+      return toast({
+        title: "You have to log in first!",
+        variant: "destructive",
+      })
+    }
+  }, [currentUser, toast])
   return (
     <div className="flex items-center justify-between gap-6">
-      <div className="text-sm px-4 py-3 rounded-full hover:bg-neutral-100/80 transition cursor-pointer">
-        Airbnb your home
+      <div
+        onClick={openRentModal}
+        className="text-sm px-4 py-3 rounded-full hover:bg-neutral-100/80 transition cursor-pointer"
+      >
+        {currentUser ? <RentModal /> : "Airbnb your home"}
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-1.5 border rounded-full px-2 shadow-sm hover:shadow-md transition">
@@ -59,7 +73,7 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
                 <Link href={"/"}>My properties</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="p-3 font-medium">
-                <Link href={"/"}>Airbnb my home</Link>
+                <RentModal />
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>

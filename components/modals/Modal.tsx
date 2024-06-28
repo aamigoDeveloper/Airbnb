@@ -60,7 +60,7 @@ export default function Modal({
         <DialogHeader className="px-5 pb-6 border-b border-b-neutral-300">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-4 pb-4 border-b border-b-neutral-300">
+        <div className="relative flex-auto">
           {body}
         </div>
         <DialogFooter>

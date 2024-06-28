@@ -5,7 +5,7 @@ import Heading from "../Heading"
 import { categories } from "../navbar/Categories"
 import CategoryInput from "../CategoryInput"
 import CountrySelect from "../CountrySelect"
-import Map from "../Map"
+import dynamic from "next/dynamic"
 
 enum STEPS {
   CATEGORY = 0,
@@ -37,6 +37,12 @@ export default function RentModal() {
   const category = watch("category")
   const location = watch("location")
 
+  const Map = useMemo(
+    () => dynamic(() => import("../Map"), { ssr: false }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [location]
+  )
+
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -47,7 +53,7 @@ export default function RentModal() {
 
   const onSubmit = (data: FieldValues) => {
     if (steps !== STEPS.PRICE) {
-        return onNext()
+      return onNext()
     }
   }
 

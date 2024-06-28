@@ -18,6 +18,9 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import { BiDollar } from "react-icons/bi"
+import { useToast } from "../ui/use-toast"
+import { createListing } from "@/app/actions/createListing"
+import { useRouter } from "next/navigation"
 
 enum STEPS {
   CATEGORY = 0,
@@ -30,6 +33,7 @@ enum STEPS {
 
 export default function RentModal() {
   const [steps, setSteps] = useState(STEPS.CATEGORY)
+  const router = useRouter()
   const form = useForm<FieldValues>({
     defaultValues: {
       category: "",
@@ -45,6 +49,8 @@ export default function RentModal() {
   })
 
   const { handleSubmit, reset, setValue, watch, control } = form
+
+  const { toast } = useToast()
 
   const category = watch("category")
   const location = watch("location")
@@ -67,9 +73,24 @@ export default function RentModal() {
     })
   }
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     if (steps !== STEPS.PRICE) {
       return onNext()
+    }
+
+    try {
+      await createListing(data)
+      router.refresh()
+      reset()
+      setSteps(STEPS.CATEGORY)
+      toast({
+        title: "Listing Created! ✅",
+      })
+    } catch (error) {
+      toast({
+        title: "uh oh! Something went wrong, Please try again.",
+        variant: "destructive",
+      })
     }
   }
 

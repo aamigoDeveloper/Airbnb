@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "../ui/form"
 import { Input } from "../ui/input"
+import { BiDollar } from "react-icons/bi"
 
 enum STEPS {
   CATEGORY = 0,
@@ -222,7 +223,37 @@ export default function RentModal() {
     )
   }
 
-
+  if (steps === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Now, set your price"
+          subtitle="How much do you charge per night?"
+        />
+        <Form {...form}>
+          <FormField
+            control={control}
+            name="price"
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-start ">
+                <FormLabel className="text-neutral-500">Price</FormLabel>
+                <FormControl>
+                  <div className="w-full">
+                    <BiDollar
+                      size={20}
+                      className="text-neutral-700 absolute bottom-6 left-2"
+                    />
+                    <Input {...field} className="w-full p-8" type="number" />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </Form>
+      </div>
+    )
+  }
 
   return (
     <Modal

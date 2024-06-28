@@ -8,6 +8,15 @@ import CountrySelect from "../CountrySelect"
 import dynamic from "next/dynamic"
 import Counter from "../Counter"
 import ImageUpload from "../ImageUpload"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form"
+import { Input } from "../ui/input"
 
 enum STEPS {
   CATEGORY = 0,
@@ -34,7 +43,7 @@ export default function RentModal() {
     },
   })
 
-  const { handleSubmit, reset, setValue, watch } = form
+  const { handleSubmit, reset, setValue, watch, control } = form
 
   const category = watch("category")
   const location = watch("location")
@@ -169,6 +178,51 @@ export default function RentModal() {
       </div>
     )
   }
+
+  if (steps === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How would you describe your place?"
+          subtitle="Short and sweet works best?"
+        />
+        <Form {...form}>
+          <div className="space-y-5">
+            <FormField
+              control={control}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-start ">
+                  <FormLabel className="text-neutral-500">Title</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="p-8" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-start">
+                  <FormLabel className="text-neutral-500">
+                    Description
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} className="p-8" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </Form>
+      </div>
+    )
+  }
+
+
 
   return (
     <Modal

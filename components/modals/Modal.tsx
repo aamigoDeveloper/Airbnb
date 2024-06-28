@@ -65,7 +65,7 @@ export default function Modal({
         </div>
         <DialogFooter>
           <div className="flex flex-col gap-5 flex-grow">
-            <div className="flex flex-row gap-4 items-center w-full">
+            <div className="flex flex-row gap-4 items-center w-full mt-4">
               {secondaryAction && secondaryActionLabel && (
               <Button
                 disabled={disabled}
